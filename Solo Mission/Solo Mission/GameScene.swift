@@ -71,7 +71,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(background)
         
         player.setScale(1)
-        player.position = CGPoint(x: self.size.width/2, y: self.size.height * 0.2)
+        player.position = CGPoint(x: self.size.width/2, y: -player.size.height)
         player.zPosition = 2
         player.physicsBody = SKPhysicsBody(rectangleOfSize: player.size)
         player.physicsBody!.affectedByGravity = false
@@ -79,6 +79,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.physicsBody!.collisionBitMask = PhysicsCategories.None
         player.physicsBody!.contactTestBitMask = PhysicsCategories.Enemy
         self.addChild(player)
+        
+        let movePlayer = SKAction.moveToY(self.size.height * 0.2, duration: 1)
+        player.runAction(movePlayer)
         
         scoreLabel.text = "Score: 0"
         scoreLabel.fontSize = 70
