@@ -9,7 +9,7 @@
 import SpriteKit
 
 class GameScene: SKScene {
-    let player = SKSpriteNode(imageNamed: "playerShip")
+    let player = SKSpriteNode(imageNamed: "pepe")
     
     func random() -> CGFloat {
         return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
@@ -34,6 +34,7 @@ class GameScene: SKScene {
     }
     
     override func didMoveToView(view: SKView) {
+        // Setup the stage here
         let background = SKSpriteNode(imageNamed: "background")
         background.size = self.size
         background.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
@@ -44,6 +45,16 @@ class GameScene: SKScene {
         player.position = CGPoint(x: self.size.width/2, y: self.size.height * 0.2)
         player.zPosition = 2
         self.addChild(player)
+        
+        startNewLevel()
+    }
+    
+    func startNewLevel() {
+        let spawn = SKAction.runBlock(spawnEnemy)
+        let waitToSpawn = SKAction.waitForDuration(1)
+        let spawnSequence = SKAction.sequence([spawn, waitToSpawn])
+        let spawnForever = SKAction.repeatActionForever(spawnSequence)
+        self.runAction(spawnForever)
     }
     
     func fireBullet() {
@@ -66,13 +77,13 @@ class GameScene: SKScene {
         let startPoint = CGPoint(x: randomXStart, y: self.size.height * 1.2)
         let endPoint = CGPoint(x: randomXEnd, y: -self.size.height * 0.2)
         
-        let enemy = SKSpriteNode(imageNamed: "enemyShip")
-        enemy.setScale(1)
+        let enemy = SKSpriteNode(imageNamed: "datBoi")
+        enemy.setScale(0.2)
         enemy.position = startPoint
         enemy.zPosition = 2
         self.addChild(enemy)
         
-        let moveEnemy = SKAction.moveTo(endPoint, duration: 1.5)
+        let moveEnemy = SKAction.moveTo(endPoint, duration: 2)
         let deleteEnemy = SKAction.removeFromParent()
         let enemySequence = SKAction.sequence([moveEnemy, deleteEnemy])
         
@@ -86,7 +97,6 @@ class GameScene: SKScene {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         fireBullet()
-        spawnEnemy()
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
