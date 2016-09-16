@@ -14,6 +14,7 @@
 		3D9805841D8B362E0002598B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D9805821D8B362E0002598B /* Main.storyboard */; };
 		3D9805861D8B362E0002598B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D9805851D8B362E0002598B /* Assets.xcassets */; };
 		3D9805891D8B362E0002598B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D9805871D8B362E0002598B /* LaunchScreen.storyboard */; };
+		3DE0302A1D8B9F7B00FF2A6F /* theBoldFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DE030291D8B9F7B00FF2A6F /* theBoldFont.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		3D9805851D8B362E0002598B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3D9805881D8B362E0002598B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3D98058A1D8B362E0002598B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3DE030291D8B9F7B00FF2A6F /* theBoldFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = theBoldFont.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				3D9805851D8B362E0002598B /* Assets.xcassets */,
 				3D9805871D8B362E0002598B /* LaunchScreen.storyboard */,
 				3D98058A1D8B362E0002598B /* Info.plist */,
+				3DE030291D8B9F7B00FF2A6F /* theBoldFont.ttf */,
 			);
 			path = "Solo Mission";
 			sourceTree = "<group>";
@@ -130,6 +133,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D98057D1D8B362E0002598B /* GameScene.sks in Resources */,
+				3DE0302A1D8B9F7B00FF2A6F /* theBoldFont.ttf in Resources */,
 				3D9805891D8B362E0002598B /* LaunchScreen.storyboard in Resources */,
 				3D9805861D8B362E0002598B /* Assets.xcassets in Resources */,
 				3D9805841D8B362E0002598B /* Main.storyboard in Resources */,
