@@ -8,8 +8,10 @@
 
 import SpriteKit
 
+var gameScore = 0
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
-    var gameScore = 0
+    
     let scoreLabel = SKLabelNode(fontNamed: "The Bold Font")
     
     var livesNumber = 3
@@ -18,6 +20,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var levelNumber = 0
     
     let player = SKSpriteNode(imageNamed: "pepe")
+    
+    enum gameState {
+        case preGame
+        case inGame
+        case afterGame
+    }
+    
+    var currentGameState = gameState.inGame
     
     struct PhysicsCategories {
         static let None : UInt32 = 0
@@ -51,6 +61,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMoveToView(view: SKView) {
         // Setup the stage here
         self.physicsWorld.contactDelegate = self
+        
+        gameScore = 0
         
         let background = SKSpriteNode(imageNamed: "background")
         background.size = self.size
@@ -105,6 +117,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let scaleDown = SKAction.scaleTo(1, duration: 0.2)
         let scaleSequence = SKAction.sequence([scaleUp, scaleDown])
         livesLabel.runAction(scaleSequence)
+        
+        if livesNumber == 0 {
+            runGameOver()
+        }
     }
     
     func startNewLevel() {
@@ -160,6 +176,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             body1.node?.removeFromParent()
             body2.node?.removeFromParent()
+            
+            runGameOver()
         }
         
         if body1.categoryBitMask == PhysicsCategories.Bullet && body2.categoryBitMask == PhysicsCategories.Enemy && body2.node?.position.y < self.size.height {
@@ -193,6 +211,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func fireBullet() {
         let bullet = SKSpriteNode(imageNamed: "tear")
+        bullet.name = "Bullet"
         bullet.setScale(0.15)
         bullet.position = player.position
         bullet.zPosition = 1
@@ -217,6 +236,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let endPoint = CGPoint(x: randomXEnd, y: -self.size.height * 0.2)
         
         let enemy = SKSpriteNode(imageNamed: "datBoi")
+        enemy.name = "Enemy"
         enemy.setScale(0.2)
         enemy.position = startPoint
         enemy.zPosition = 2
@@ -232,7 +252,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let loseALife = SKAction.runBlock(loseLife)
         let enemySequence = SKAction.sequence([moveEnemy, deleteEnemy, loseALife])
         
-        enemy.runAction(enemySequence)
+        if currentGameState == gameState.inGame {
+            enemy.runAction(enemySequence)
+        }
         
         let dx = endPoint.x - startPoint.x
         let dy = endPoint.y - startPoint.y
@@ -240,8 +262,42 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy.zRotation = amountToRotate
     }
     
+    func runGameOver() {
+        currentGameState = gameState.afterGame
+        
+        self.removeAllActions()
+        
+        self.enumerateChildNodesWithName("Bullet") {
+            bullet, stop in
+            
+            bullet.removeAllActions()
+        }
+        
+        self.enumerateChildNodesWithName("Enemy") {
+            enemy, stop in
+            
+            enemy.removeAllActions()
+        }
+        
+        let changeSceneAction = SKAction.runBlock(changeScene)
+        let waitToChangeScene = SKAction.waitForDuration(1)
+        let changeSceneSequence = SKAction.sequence([waitToChangeScene, changeSceneAction])
+        self.runAction(changeSceneSequence)
+    }
+    
+    func changeScene() {
+        // ensure scene transition has same size and scale
+        let sceneToMoveTo = GameOverScene(size: self.size)
+        sceneToMoveTo.scaleMode = self.scaleMode
+        
+        let myTransition = SKTransition.fadeWithDuration(0.5)
+        self.view!.presentScene(sceneToMoveTo, transition: myTransition)
+    }
+    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        fireBullet()
+        if currentGameState == gameState.inGame {
+            fireBullet()
+        }
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -251,7 +307,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             let amountDragged =  pointOfTouch.x - previousPointOfTouch.x
             
-            player.position.x += amountDragged
+            if currentGameState == gameState.inGame {
+                player.position.x += amountDragged
+            }
             
             if player.position.x > CGRectGetMaxX(gameArea) - player.size.width/2 {
                 player.position.x = CGRectGetMaxX(gameArea) - player.size.width/2

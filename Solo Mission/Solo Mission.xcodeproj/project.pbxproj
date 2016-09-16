@@ -15,6 +15,7 @@
 		3D9805861D8B362E0002598B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D9805851D8B362E0002598B /* Assets.xcassets */; };
 		3D9805891D8B362E0002598B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D9805871D8B362E0002598B /* LaunchScreen.storyboard */; };
 		3DE0302A1D8B9F7B00FF2A6F /* theBoldFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DE030291D8B9F7B00FF2A6F /* theBoldFont.ttf */; };
+		3DE0302C1D8BB1E400FF2A6F /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE0302B1D8BB1E400FF2A6F /* GameOverScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		3D9805881D8B362E0002598B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3D98058A1D8B362E0002598B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DE030291D8B9F7B00FF2A6F /* theBoldFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = theBoldFont.ttf; sourceTree = "<group>"; };
+		3DE0302B1D8BB1E400FF2A6F /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,10 +66,11 @@
 				3D98057C1D8B362E0002598B /* GameScene.sks */,
 				3D98057E1D8B362E0002598B /* GameScene.swift */,
 				3D9805801D8B362E0002598B /* GameViewController.swift */,
+				3DE0302B1D8BB1E400FF2A6F /* GameOverScene.swift */,
 				3D9805821D8B362E0002598B /* Main.storyboard */,
-				3D9805851D8B362E0002598B /* Assets.xcassets */,
 				3D9805871D8B362E0002598B /* LaunchScreen.storyboard */,
 				3D98058A1D8B362E0002598B /* Info.plist */,
+				3D9805851D8B362E0002598B /* Assets.xcassets */,
 				3DE030291D8B9F7B00FF2A6F /* theBoldFont.ttf */,
 			);
 			path = "Solo Mission";
@@ -150,6 +153,7 @@
 				3D98057F1D8B362E0002598B /* GameScene.swift in Sources */,
 				3D9805811D8B362E0002598B /* GameViewController.swift in Sources */,
 				3D98057B1D8B362E0002598B /* AppDelegate.swift in Sources */,
+				3DE0302C1D8BB1E400FF2A6F /* GameOverScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
